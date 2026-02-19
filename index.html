@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenisha AKA Sana 💍</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', cursive;
+    background: linear-gradient(135deg, #ff9ecf, #ffc0cb, #ff66b2);
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* CENTER EVERYTHING */
+.center {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* INPUT */
+input {
+    padding: 14px;
+    width: 80%;
+    max-width: 300px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* BUTTONS */
+button {
+    padding: 14px 25px;
+    width: 80%;
+    max-width: 280px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    background: #ff3399;
+    color: white;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    transition: 0.3s;
+}
+button:active { transform: scale(0.95); }
+
+/* HEADINGS */
+h1 { font-size: 34px; animation: glow 2s infinite alternate; }
+h2 { font-size: 22px; }
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 25px #ff0066; }
+}
+
+/* HEARTS */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* HIDE SECTIONS */
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen" class="center">
+    <h1>💖 A Special Surprise 💖</h1>
+    <p>Enter our special word 🔐</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkPassword()">Unlock 💕</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent" class="center hidden">
+
+<audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div id="countdownSection">
+    <h1>Something Beautiful Is Coming... 💞</h1>
+    <h2 id="countdown"></h2>
+</div>
+
+<div id="proposalSection" class="hidden">
+    <h1>Kenisha AKA Sana 💍</h1>
+    <h2>You are my today, tomorrow & forever 💖</h2>
+    <h2>Will you marry me?</h2>
+
+    <button onclick="sayYes()">1. Yes 💖</button>
+    <button ontouchstart="moveButton(this)">2. Yes 💕</button>
+    <button ontouchstart="moveButton(this)">3. Option 1 💗</button>
+    <button ontouchstart="moveButton(this)">4. Option 2 💞</button>
+
+    <p style="margin-top:30px;">Forever Yours,<br><strong>Rodick Elangbam 💘</strong></p>
+</div>
+
+</div>
+
+<script>
+
+/* PASSWORD */
+function checkPassword() {
+    const pass = document.getElementById("password").value;
+    if (pass === "KENIBABY") {  // UPDATED PASSWORD
+        document.getElementById("lockScreen").classList.add("hidden");
+        document.getElementById("mainContent").classList.remove("hidden");
+        document.getElementById("bgMusic").play();
+        startCountdown();
+    } else {
+        alert("Wrong password 😢 Try again my love 💕");
+    }
+}
+
+/* COUNTDOWN */
+function startCountdown() {
+    let timeLeft = 5;
+    const countdownEl = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+        countdownEl.innerHTML = timeLeft + " 💖";
+        timeLeft--;
+
+        if (timeLeft < 0) {
+            clearInterval(timer);
+            document.getElementById("countdownSection").classList.add("hidden");
+            document.getElementById("proposalSection").classList.remove("hidden");
+        }
+    }, 1000);
+}
+
+/* YES SCREEN */
+function sayYes() {
+    document.body.innerHTML = `
+        <div class="center">
+            <h1 style="font-size:40px;">💍 SHE SAID YES! 💖</h1>
+            <h2>Kenisha AKA Sana, You are mine forever 💕</h2>
+            <h3>Love you endlessly ❤️</h3>
+            <h2>– Rodick Elangbam 💘</h2>
+        </div>
+    `;
+}
+
+/* MOBILE FRIENDLY RUN BUTTON */
+function moveButton(button) {
+    button.style.position = "fixed";
+    button.style.top = Math.random() * 80 + "vh";
+    button.style.left = Math.random() * 60 + "vw";
+}
+
+/* HEARTS */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 400);
+
+</script>
+
+</body>
+</html>
